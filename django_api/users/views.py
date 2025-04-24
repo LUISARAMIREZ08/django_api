@@ -8,6 +8,7 @@ from .serializers import UserRegistrationSerializer, UserLoginSerializer, UserSe
 from .validators import validate_registration_data, validate_login_data
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
+from drf_yasg.utils import swagger_auto_schema
 
 # Obtención del modelo de usuario personalizado
 User = get_user_model()
@@ -24,6 +25,14 @@ class RegisterView(APIView):
     Métodos:
         post(request): Registra un nuevo usuario si los datos son válidos.
     """
+
+    @swagger_auto_schema(
+        request_body=UserRegistrationSerializer,  # Serializador para el body
+        responses={
+            201: "Usuario creado exitosamente",
+            400: "Datos inválidos o incompletos"
+        }
+    )
 
     def post(self, request):
         """
@@ -69,6 +78,15 @@ class AuthView(APIView):
     Métodos:
         post(request): Autentica al usuario y retorna el token JWT.
     """
+
+    @swagger_auto_schema(
+        request_body=UserLoginSerializer,  # Serializador para el body
+        responses={
+            200: "Token generado",
+            400: "Petición inválida",
+            401: "Credenciales inválidas"
+        }
+    )
 
     def post(self, request):
         """

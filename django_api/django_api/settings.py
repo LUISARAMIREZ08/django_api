@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
     'rest_framework',
     'rest_framework_simplejwt',
     'users',
@@ -134,3 +135,16 @@ REST_FRAMEWORK = {
 # This setting tells Django to use the custom user model defined in the users app.
 # This is important for authentication and user management.
 AUTH_USER_MODEL = 'users.User'
+
+# Swagger settings for API documentation
+SWAGGER_SETTINGS = {
+    'DEFAULT_AUTO_SCHEMA_CLASS': 'drf_yasg.inspectors.SwaggerAutoSchema',
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'JWT token. Ejemplo: "Bearer {token}"'
+        }
+    },
+}
