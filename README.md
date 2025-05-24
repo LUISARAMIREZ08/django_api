@@ -1,4 +1,4 @@
-# Django API - Prueba Técnica Backend
+# Django API 
 
 API REST desarrollada con Django y Django REST Framework.
 
